@@ -9,7 +9,9 @@ const connectDb = () => {
 
   const mongoUri = `mongodb://${uri}:${port}/${database}`;
   const mongoOptions = {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
   }
 
   return mongoose.connect(mongoUri, mongoOptions);

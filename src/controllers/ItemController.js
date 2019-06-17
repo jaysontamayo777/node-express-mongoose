@@ -63,9 +63,25 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  res.status(200).json({
-    action: 'Create Item'
-  })
+  var code = req.params.code;
+  var findOptions = {
+    code
+  }
+
+  const form = req.body;
+
+  Item.findOneAndUpdate(findOptions, form, {new: true})
+    .then((result) => {
+      console.log('RESULT', result);
+      res.status(200).json({
+        item: result
+      });
+    })    
+    .catch(err => {
+      res.status(400).json({
+        error: err
+      });
+    });
 }
 
 function getFromSampleApi(req, res) {
